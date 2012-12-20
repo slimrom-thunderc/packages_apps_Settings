@@ -84,8 +84,8 @@
             android:title="@string/ota_app_title">
         <intent
                 android:action="android.intent.action.MAIN"
-                android:targetClass="com.acquariusoft.UpdateMe.UpdateMeActivity"
-                android:targetPackage="com.acquariusoft.UpdateMe" />
+                android:targetClass="com.otaupdater.OTAUpdaterActivity"
+                android:targetPackage="com.otaupdater" />
     </header>
 
     <!-- Performance -->
