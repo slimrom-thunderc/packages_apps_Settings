@@ -5290,6 +5290,15 @@
     <string name="gestures_action_menu">Emulate Menu Key</string>
     <string name="gestures_action_search">Invoke Search</string>
     <string name="gestures_action_recent">Recent Applications</string>
+	
+
+    <!-- Partition info -->
+    <string name="partition_info_title">Partition info</string>
+    <string name="partition_info_system">/system</string>
+    <string name="partition_info_data">/data</string>
+    <string name="partition_info_cache">/cache</string>
+    <string name="partition_info_sdcard">/sdcard (FAT)</string>
+    <string name="partition_info_sdext">EXT partition</string>
 
     <!-- **** CYANOGENMOD ADDITIONS END **** -->
 </resources>
