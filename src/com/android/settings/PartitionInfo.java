@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.android.settings.R;
 public class PartitionInfo extends PreferenceActivity {
     private static final String TAG = "PartitionInfo";
     private static final String SYSTEM_PART_SIZE = "system_part_info";
@@ -55,6 +56,7 @@ public class PartitionInfo extends PreferenceActivity {
     private Preference mCachePartSize;
     private Preference mSDCardPartFATSize;
     private Preference mSDCardPartEXTSize;
+    private Preference mDeviceName;
     
     private boolean extfsIsMounted = false;
     
@@ -73,32 +75,18 @@ public class PartitionInfo extends PreferenceActivity {
         mSDCardPartEXTSize     = (Preference) prefSet.findPreference(SDCARDEXT_PART_SIZE);
       
         if (fileExists("/dev/block/mmcblk0p2") == true) {
-            Log.i(TAG, "sd-ext: partition mounted");
-            extfsIsMounted = true;
+Log.i(TAG, "sd: ext partition mounted");
+extfsIsMounted = true;
         } else {
-            Log.i(TAG, "sd-ext: partition not mounted");
-        }
-    	
+Log.i(TAG, "sd: ext partition not mounted");
+}
         try {
             mSystemPartSize.setSummary(ObtainFSPartSize    ("/system"));
             mDataPartSize.setSummary(ObtainFSPartSize      ("/data"));
             mCachePartSize.setSummary(ObtainFSPartSize     ("/cache"));
-            mSDCardPartFATSize.setSummary(ObtainFSPartSize ("/sdcard"));
-
+            mSDCardPartFATSize.setSummary(ObtainFSPartSize ("/storage/sdcard0"));
             if (extfsIsMounted == true) {
-                if (fileExists("/sd-ext") == true) {
-                    Log.i(TAG, "sd-ext: S2E detected");
-                    mSDCardPartEXTSize.setTitle("/sd-ext (EXT)");
-                    mSDCardPartEXTSize.setSummary(ObtainFSPartSize ("/sd-ext"));
-                } else if (fileExists("/system/sd") == true) {
-                    Log.i(TAG, "sd-ext: Darktremor detected");
-                    mSDCardPartEXTSize.setTitle("/system/sd (EXT)");
-                    mSDCardPartEXTSize.setSummary(ObtainFSPartSize ("/system/sd"));
-                } else if (fileExists("/data/sdext2") == true) {
-                    Log.i(TAG, "sd-ext: Link2SD detected");
-                    mSDCardPartEXTSize.setTitle("/data/sdext2 (EXT)");
-                    mSDCardPartEXTSize.setSummary(ObtainFSPartSize ("/data/sdext2"));
-                }
+                   mSDCardPartEXTSize.setSummary(ObtainFSPartSize ("/sd-ext"));
             } else {
                 mSDCardPartEXTSize.setEnabled(false);
             }
@@ -115,7 +103,7 @@ public class PartitionInfo extends PreferenceActivity {
         long eBlockSize = extraStat.getBlockSize();
         long eTotalBlocks = extraStat.getBlockCount();
         retstr = Formatter.formatFileSize(this, (eTotalBlocks * eBlockSize) - (extraStat.getAvailableBlocks() * eBlockSize));
-        retstr += " / ";
+        retstr += " " + getResources().getString(R.string.partition_info_used_of) + " ";
         retstr += Formatter.formatFileSize(this, eTotalBlocks * eBlockSize);
         return retstr;
     }

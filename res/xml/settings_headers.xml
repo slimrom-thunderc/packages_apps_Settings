@@ -79,14 +79,7 @@
         android:fragment="com.android.settings.cnd.InterfaceSettings"
         android:title="@string/interface_settings_title" />
 
-	!-- OTA App -->
-	<header android:icon="@drawable/ic_ota"
-            android:title="@string/ota_app_title">
-        <intent
-                android:action="android.intent.action.MAIN"
-                android:targetClass="com.otaupdater.OTAUpdaterActivity"
-                android:targetPackage="com.otaupdater" />
-    </header>
+
 
     <!-- Performance -->
     <header
@@ -162,11 +155,13 @@
     <header
         android:icon="@drawable/ic_settings_data_usage"
         android:title="@string/partition_info_title">
-        <intent
-            android:action="com.android.action.MAIN"
+        <intent 
+		    android:action="com.android.action.MAIN"
             android:targetPackage="com.android.settings"
             android:targetClass="com.android.settings.PartitionInfo" />
     </header>
+	
+
 
     <!-- Battery -->
     <header
